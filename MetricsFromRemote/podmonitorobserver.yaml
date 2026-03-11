@@ -1,0 +1,14 @@
+cat << EOF | oc apply -f -
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: skupper-network-observer
+spec:
+  jobLabel: skupper-network-observer
+  podMetricsEndpoints:
+  - interval: 30s
+    path: /metrics
+    targetPort: 8080
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: networkobserver-sample-network-observer

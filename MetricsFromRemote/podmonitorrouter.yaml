@@ -1,0 +1,15 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: skupper-router
+  labels:
+    skupper.io/component: router
+spec:
+  jobLabel: skupper-router
+  podMetricsEndpoints:
+  - interval: 30s
+    path: /metrics
+    targetPort: 9090
+  selector:
+    matchLabels:
+      skupper.io/component: router
